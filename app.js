@@ -3,12 +3,18 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const app = express();
+const headers = {
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
+    'Content-Type': 'application/json'
+}
 
 // 路由設定
 const indexRouter = require('./routes/index');
-const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-
+const postsRouter = require('./routes/posts');
+const posts2Router = require('./routes/posts2');
 
 // middlewire設定
 app.use(logger('dev'));
@@ -28,7 +34,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/posts2', posts2Router);
 
+// Day22 每日任務：自訂錯誤訊息  (1)
+// error handler
+// 錯誤處理的 middleware 相較一般 middleware 會多一個 err 引數
+app.use(function (err, req, res, next) {
+    console.log('進到錯誤訊息統一處理');
+    err.statusCode = err.statusCode || 500;
+    err.status = err.status || 'error';
+    res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
+    });
+});
 
 // 同步錯誤
 process.on('uncaughtException', err => {
