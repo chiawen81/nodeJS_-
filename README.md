@@ -18,6 +18,6 @@ https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/60c8439a66efdae42901d660
 直接打 POST=> http://127.0.0.1:3000/posts2 ，body 帶資料：`{"user":"642ee55e4bab0e48a096cf3d"}`
 
 【Day 24】<br>
-https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/60c8439a66efdae42901d6601e86f87fbe23ff1c<br>
-測試方式： <br>
-同 Day 23
+https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/79e22d04d122a6604de9042bdf6083830b791a3d<br>
+測試方式：同 Day 23 <br>
+
