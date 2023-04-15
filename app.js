@@ -55,7 +55,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Day23 每日任務：development 及 production 環境變數指令、客製錯誤訊息
+// Day23 每日任務 (1)：development 及 production 環境變數指令、客製錯誤訊息 
 // 自己設定的 err 錯誤 
 const resErrorProd = (err, res) => {
     console.log('resErrorProd');
@@ -67,6 +67,7 @@ const resErrorProd = (err, res) => {
     } else {
         // log 紀錄
         console.error('出現重大錯誤', err);
+
         // 送出罐頭預設訊息
         res.status(500).json({
             status: 'error',
@@ -75,25 +76,39 @@ const resErrorProd = (err, res) => {
     }
 };
 
+// Day23 每日任務 (2)
 // 開發環境錯誤
-const resErrorDev = (err, res) => {
+const resErrorDev = (err, res, req) => {
     console.log('resErrorDev');
-
-    res.status(err.statusCode).json({
+    let error = {
+        statusCode: err.statusCode,
+        status: err.statusCode,
+        body: req.body,
+        message: err.message,
+        stack: err.stack,
+        detailInfo: err,
+        // note: 以下訊息不一定有值
+        // type: err.errors.type.message
+        // expose: err.expose,      
+    };
+    res.writeHead(err.statusCode || 500, headers);
+    res.write(JSON.stringify({
         status: err.status,
         message: err.message,
-        error: err,
+        error: error,
         stack: err.stack
-    });
+    }));
+    res.end();
 };
 
-// error handler
+// Day23 每日任務 (3)
+// error handler （自訂錯誤訊息統一處理）
 app.use(function (err, req, res, next) {
     console.log('error handler');
     // dev
     err.statusCode = err.statusCode || 500;
     if (process.env.NODE_ENV === 'dev') {
-        return resErrorDev(err, res);
+        return resErrorDev(err, res, req);
     }
     // production
     if (err.name === 'ValidationError') {
