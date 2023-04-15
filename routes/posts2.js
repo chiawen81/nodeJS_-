@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const appError = require('../service/appError');
+const handleErrorAsync = require("../service/handleErrorAsync");
 const Post = require("../models/posts");
 
-// Day23 每日任務 (4)
-router.post('/', async function (req, res, next) {
+
+
+// Day24 每日任務 (2)
+router.post('/', handleErrorAsync(getPosts));
+
+// Day24 每日任務 (3)
+const getPosts = async function (req, res, next) {
     console.log(1)
     if (req.body.content == undefined) {
         console.log(2)
@@ -17,7 +23,7 @@ router.post('/', async function (req, res, next) {
         post: newPost
     })
     res.end();
-});
+}
 
 router.get('/', async (req, res, next) => {
     console.log("find router posts2")

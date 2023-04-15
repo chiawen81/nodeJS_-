@@ -1,4 +1,6 @@
+// Day24 每日任務 (1)
 const handleErrorAsync = function handleErrorAsync(func) {
+    console.log('有進來 handleErrorAsync');
     // func 先將 async fun 帶入參數儲存
     // middleware 先接住 router 資料
     return function (req, res, next) {
