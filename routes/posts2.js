@@ -4,12 +4,7 @@ const appError = require('../service/appError');
 const handleErrorAsync = require("../service/handleErrorAsync");
 const Post = require("../models/posts");
 
-
-
 // Day24 每日任務 (2)
-router.post('/', handleErrorAsync(getPosts));
-
-// Day24 每日任務 (3)
 const getPosts = async function (req, res, next) {
     console.log(1)
     if (req.body.content == undefined) {
@@ -24,6 +19,11 @@ const getPosts = async function (req, res, next) {
     })
     res.end();
 }
+
+// Day24 每日任務 (3)
+router.post('/', handleErrorAsync(getPosts));
+
+
 
 router.get('/', async (req, res, next) => {
     console.log("find router posts2")
