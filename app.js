@@ -18,6 +18,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const posts2Router = require('./routes/posts2');
+const signUpRouter = require("./routes/sign_up");
 
 // 同步錯誤
 process.on('uncaughtException', err => {
@@ -48,6 +49,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/posts2', posts2Router);
+app.use('/sign_up', signUpRouter);
+
 
 app.use(function (req, res, next) {
     console.log('大家都進來了~');
@@ -55,7 +58,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Day23 每日任務 (1)：development 及 production 環境變數指令、客製錯誤訊息 
 // 自己設定的 err 錯誤 
 const resErrorProd = (err, res) => {
     console.log('resErrorProd');
@@ -76,7 +78,6 @@ const resErrorProd = (err, res) => {
     }
 };
 
-// Day23 每日任務 (2)
 // 開發環境錯誤
 const resErrorDev = (err, res, req) => {
     console.log('resErrorDev');
@@ -101,7 +102,6 @@ const resErrorDev = (err, res, req) => {
     res.end();
 };
 
-// Day23 每日任務 (3)
 // error handler （自訂錯誤訊息統一處理）
 app.use(function (err, req, res, next) {
     console.log('error handler');
