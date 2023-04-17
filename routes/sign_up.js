@@ -3,6 +3,7 @@ const router = express.Router();
 const appError = require('../service/appError');
 const handleErrorAsync = require("../service/handleErrorAsync");
 var validator = require('validator');
+var bcrypt = require('bcryptjs');
 const User = require("../models/users");
 
 router.post('/', handleErrorAsync(async (req, res, next) => {
@@ -18,26 +19,32 @@ router.post('/', handleErrorAsync(async (req, res, next) => {
     console.log('emailValidator', emailValidator);
     console.log('nameValidator', nameValidator);
 
-    // 加密密碼
-    //password = 
-    // const newUser = await User.create({
-    //     email,
-    //     password,
-    //     name
-    // });
-
-    if (passwordValidator && emailValidator && nameValidator) {
-        res.status(200).json({
-            status: 'success',
-            valid: true
+    // 每日任務 Day25：加密密碼
+    bcrypt.hash(password, 12).then(async val => {
+        console.log(val);
+        const newUser = await User.create({
+            email,
+            password: val,
+            name
         });
-    } else {
-        res.status(200).json({
-            status: 'success',
-            valid: false
-        });
-    };
+        console.log('newUser', newUser);
 
+        if (passwordValidator && emailValidator && nameValidator) {
+            console.log(1)
+            res.status(200).json({
+                status: 'success',
+                valid: true,
+                // data: newUser
+            });
+        } else {
+            console.log(2)
+            res.status(200).json({
+                status: 'success',
+                valid: false,
+                errorMsg: "請檢查您的資料是否正確"
+            });
+        };
+    });
 }));
 
 module.exports = router;
