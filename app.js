@@ -12,13 +12,14 @@ const headers = {
     'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
     'Content-Type': 'application/json'
 };
-dotenv.config({ path: './config.env' });
+
 // 路由設定
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const posts2Router = require('./routes/posts2');
 const signUpRouter = require("./routes/sign_up");
+const signInRouter = require("./routes/sign_in");
 
 // 資料庫設定開始
 dotenv.config({ path: './config.env' });
@@ -47,6 +48,7 @@ app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/posts2', posts2Router);
 app.use('/sign_up', signUpRouter);
+app.use('/sign_in', signInRouter);
 
 
 app.use(function (req, res, next) {

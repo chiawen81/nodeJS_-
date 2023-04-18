@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     required: false
   },
   photo: String,
-}, { collection: 'user' });
+});
 
 const User = mongoose.model('User', userSchema);
 
