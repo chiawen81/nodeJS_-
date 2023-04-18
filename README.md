@@ -34,6 +34,6 @@ https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/f0e14ffdaf1cba9a6fbae85a
     "name":"兔兔"
 }`
 
-【Day 24】<br>
+【Day 27】<br>
 https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/8dbd84fab6cabd474b57dc322591d0d9fedb4834<br>
 測試方式：同 Day 26 <br>
