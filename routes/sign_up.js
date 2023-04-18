@@ -19,32 +19,29 @@ router.post('/', handleErrorAsync(async (req, res, next) => {
     console.log('emailValidator', emailValidator);
     console.log('nameValidator', nameValidator);
 
-    // 每日任務 Day25：加密密碼
-    bcrypt.hash(password, 12).then(async val => {
-        console.log(val);
+    // 每日任務 Day25：加密密碼(改寫)
+    if (passwordValidator && emailValidator && nameValidator) {
+        const hashPassword = await bcrypt.hash(password, 12);
         const newUser = await User.create({
             email,
-            password: val,
+            password: hashPassword,
             name
         });
-        console.log('newUser', newUser);
 
-        if (passwordValidator && emailValidator && nameValidator) {
-            console.log(1)
-            res.status(200).json({
-                status: 'success',
-                valid: true,
-                // data: newUser
-            });
-        } else {
-            console.log(2)
-            res.status(200).json({
-                status: 'success',
-                valid: false,
-                errorMsg: "請檢查您的資料是否正確"
-            });
-        };
-    });
+        console.log('newUser', newUser);
+        res.status(200).json({
+            status: 'success',
+            valid: true,
+            // data: newUser
+        });
+    } else {
+        console.log(2)
+        res.status(200).json({
+            status: 'success',
+            valid: false,
+            errorMsg: "請檢查您的資料是否正確"
+        });
+    };
 }));
 
 module.exports = router;
