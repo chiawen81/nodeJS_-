@@ -12,7 +12,7 @@ const headers = {
     'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
     'Content-Type': 'application/json'
 };
-
+dotenv.config({ path: './config.env' });
 // 路由設定
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -21,7 +21,8 @@ const posts2Router = require('./routes/posts2');
 const signUpRouter = require("./routes/sign_up");
 
 // 資料庫設定開始
-mongoose.connect('mongodb://localhost:27017/testPost6')
+dotenv.config({ path: './config.env' });
+mongoose.connect(process.env.DATABASE)
     .then(res => console.log("連線資料成功123"));
 
 // 同步錯誤
@@ -31,14 +32,6 @@ process.on('uncaughtException', err => {
     console.error(err);
     process.exit(1);
 });
-
-dotenv.config({ path: './config.env' });
-// const DB = process.env.DATABASE.replace(
-//     '<password>',
-//     process.env.DATABASE_PASSWORD
-// );
-
-
 
 // middlewire設定
 app.use(cors());

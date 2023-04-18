@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, '請輸入您的密碼']
   },
+  token: {
+    type: String,
+    required: false
+  },
   photo: String,
 }, { collection: 'user' });
 
