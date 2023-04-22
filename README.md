@@ -36,8 +36,14 @@ https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/f0e14ffdaf1cba9a6fbae85a
 
 【Day 27】<br>
 https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/8dbd84fab6cabd474b57dc322591d0d9fedb4834 <br>
-測試方式：同Day 25、Day 26<br>
+測試方式：打 POST=> http://127.0.0.1:3000/sign_up ，body 帶資料同Day 25、Day 26<br>
 
 【Day 28】<br>
 https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/b7a751530ff1965f63a9eb2654f355fb9edfa06c <br>
-測試方式：同Day 27<br>
+測試方式：打 POST=> http://127.0.0.1:3000/sign_in ，body 帶資料：同Day 27<br>
+
+【Day 29】<br>
+https://github.com/chiawen81/nodeJS_DailyTasks_d20/tree/9e1a6ad1ea375986821d70d5255056dc04cbddd4 <br>
+測試方式：打 POST=> http://127.0.0.1:3000/users/test ，body 帶資料：同Day 27<br>
+
+
