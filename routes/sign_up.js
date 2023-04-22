@@ -19,6 +19,7 @@ router.post('/', handleErrorAsync(async (req, res, next) => {
 
     if (passwordValidator && emailValidator && nameValidator) {
         const hashPassword = await bcrypt.hash(password, 12);
+        console.log('hashPassword', hashPassword);
         const newUser = await User.create({
             email,
             password: hashPassword,
