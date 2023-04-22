@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const handleErrorAsync = require("../service/handleErrorAsync");
 const appError = require('../service/appError');
-const sendBackJWT = require("../service/auth");
+const { sendBackJWT } = require("../service/auth");
 var validator = require('validator');
 var bcrypt = require('bcryptjs');
 const User = require("../models/users");
@@ -20,7 +20,7 @@ router.post('/', handleErrorAsync(async (req, res, next) => {
 
         if (result) {
             console.log('身份證確');
-            sendBackJWT(req.body, res, 200);
+            sendBackJWT(user, res, 200);
         } else {
             return next(appError(200, "欄位驗證錯誤！", next));
         };
