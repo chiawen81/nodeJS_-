@@ -20,6 +20,7 @@ const postsRouter = require('./routes/posts');
 const posts2Router = require('./routes/posts2');
 const signUpRouter = require("./routes/sign_up");
 const signInRouter = require("./routes/sign_in");
+const uploadRouter = require('./routes/upload');                // 第七週正課：firebase
 
 // 資料庫設定開始
 dotenv.config({ path: './config.env' });
@@ -41,7 +42,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function (req, res, next) {
+    console.log('大家都進來了~');
+    // console.log('process.env', process.env);
+    next();
+});
 // 路由
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -49,13 +54,10 @@ app.use('/posts', postsRouter);
 app.use('/posts2', posts2Router);
 app.use('/sign_up', signUpRouter);
 app.use('/sign_in', signInRouter);
+app.use('/upload', uploadRouter);                               // 第七週正課：firebase
 
 
-app.use(function (req, res, next) {
-    console.log('大家都進來了~');
-    console.log('process.env', process.env);
-    next();
-});
+
 
 // 自己設定的 err 錯誤 
 const resErrorProd = (err, res) => {
